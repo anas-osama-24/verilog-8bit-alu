@@ -14,15 +14,30 @@ module tb_alu8_interactive;
         $dumpvars(0, tb_alu8_interactive);
     end
 
+    // read a binary number, re-prompt if it is larger than max
     task read_bin(input [31:0] max, output [31:0] val);
         integer st;
         begin
             val = max + 1;
             while (val > max) begin
                 st = $fscanf(32'h8000_0000, "%b", val);
-                if (st != 1) val = 0;                    
+                if (st != 1) val = 0;
                 else if (val > max) $write("too many bits, try again: ");
             end
+        end
+    endtask
+
+    // read a decimal shift count, re-prompt until 0 to 7
+    task read_shift(output [31:0] val);
+        integer st, tmp;
+        begin
+            tmp = -1;
+            while (tmp < 0 || tmp > 7) begin
+                st = $fscanf(32'h8000_0000, "%d", tmp);
+                if (st != 1) tmp = 0;
+                else if (tmp < 0 || tmp > 7) $write("must be 0 to 7, try again: ");
+            end
+            val = tmp;
         end
     endtask
 
@@ -46,8 +61,8 @@ module tb_alu8_interactive;
                     b_in = 0;
                 end
                 else if (op_in == 6 || op_in == 7) begin
-                    $write("shift count (3-bit binary, 000 to 111): ");
-                    read_bin(7, b_in);
+                    $write("number of bits to shift (decimal, 0 to 7): ");
+                    read_shift(b_in);
                 end
                 else begin
                     $write("B (8-bit binary): ");
@@ -72,7 +87,7 @@ module tb_alu8_interactive;
 
                 $display("A      = %b (%0d)", a, a);
                 if (op_in == 6 || op_in == 7)
-                    $display("shift  = %b (%0d bits)", b[2:0], b[2:0]);
+                    $display("shift  = %0d bits", b[2:0]);
                 else if (op_in != 5)
                     $display("B      = %b (%0d)", b, b);
                 $display("result = %b (%0d)", result, result);

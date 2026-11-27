@@ -1,5 +1,5 @@
 $date
-	Thu Nov 26 16:08:17 2026
+	Fri Nov 27 14:24:23 2026
 $end
 $version
 	Icarus Verilog
@@ -21,19 +21,19 @@ $var integer 32 * status [31:0] $end
 $scope module dut $end
 $var wire 8 + a [7:0] $end
 $var wire 8 , b [7:0] $end
-$var wire 3 - op [2:0] $end
+$var wire 1 # carry $end
+$var wire 1 - is_arith $end
+$var wire 3 . op [2:0] $end
 $var wire 1 ! zero $end
-$var wire 8 . xor_result [7:0] $end
-$var wire 8 / shr_result [7:0] $end
-$var wire 8 0 shl_reversed [7:0] $end
+$var wire 8 / xor_result [7:0] $end
+$var wire 8 0 shr_result [7:0] $end
 $var wire 8 1 shl_result [7:0] $end
 $var wire 8 2 result [7:0] $end
 $var wire 8 3 or_result [7:0] $end
 $var wire 8 4 not_result [7:0] $end
-$var wire 1 # carry $end
 $var wire 8 5 and_result [7:0] $end
-$var wire 8 6 add_sub_result [7:0] $end
-$var wire 8 7 a_reversed [7:0] $end
+$var wire 1 6 adder_carry $end
+$var wire 8 7 add_sub_result [7:0] $end
 $scope begin logic_slice[0] $end
 $var parameter 2 8 i $end
 $upscope $end
@@ -679,7 +679,7 @@ $var wire 8 8% a [7:0] $end
 $var wire 8 9% b [7:0] $end
 $var wire 1 :% sub $end
 $var wire 8 ;% sum [7:0] $end
-$var wire 1 # carry_out $end
+$var wire 1 6 carry_out $end
 $var wire 9 <% carry [8:0] $end
 $var wire 8 =% b_xor_sub [7:0] $end
 $scope begin bit_slice[0] $end
@@ -1161,3 +1161,538 @@ $var wire 1 .) sel $end
 $var wire 1 /) sel_n $end
 $upscope $end
 $scope module s4_bit0 $end
+$var wire 1 0) in0 $end
+$var wire 1 1) in0_gated $end
+$var wire 1 2) in1 $end
+$var wire 1 3) in1_gated $end
+$var wire 1 4) out $end
+$var wire 1 5) sel $end
+$var wire 1 6) sel_n $end
+$upscope $end
+$scope module s4_bit1 $end
+$var wire 1 7) in0 $end
+$var wire 1 8) in0_gated $end
+$var wire 1 9) in1 $end
+$var wire 1 :) in1_gated $end
+$var wire 1 ;) out $end
+$var wire 1 <) sel $end
+$var wire 1 =) sel_n $end
+$upscope $end
+$scope module s4_bit2 $end
+$var wire 1 >) in0 $end
+$var wire 1 ?) in0_gated $end
+$var wire 1 @) in1 $end
+$var wire 1 A) in1_gated $end
+$var wire 1 B) out $end
+$var wire 1 C) sel $end
+$var wire 1 D) sel_n $end
+$upscope $end
+$scope module s4_bit3 $end
+$var wire 1 E) in0 $end
+$var wire 1 F) in0_gated $end
+$var wire 1 G) in1 $end
+$var wire 1 H) in1_gated $end
+$var wire 1 I) out $end
+$var wire 1 J) sel $end
+$var wire 1 K) sel_n $end
+$upscope $end
+$scope module s4_bit4 $end
+$var wire 1 L) in0 $end
+$var wire 1 M) in0_gated $end
+$var wire 1 N) in1 $end
+$var wire 1 O) in1_gated $end
+$var wire 1 P) out $end
+$var wire 1 Q) sel $end
+$var wire 1 R) sel_n $end
+$upscope $end
+$scope module s4_bit5 $end
+$var wire 1 S) in0 $end
+$var wire 1 T) in0_gated $end
+$var wire 1 U) in1 $end
+$var wire 1 V) in1_gated $end
+$var wire 1 W) out $end
+$var wire 1 X) sel $end
+$var wire 1 Y) sel_n $end
+$upscope $end
+$scope module s4_bit6 $end
+$var wire 1 Z) in0 $end
+$var wire 1 [) in0_gated $end
+$var wire 1 \) in1 $end
+$var wire 1 ]) in1_gated $end
+$var wire 1 ^) out $end
+$var wire 1 _) sel $end
+$var wire 1 `) sel_n $end
+$upscope $end
+$scope module s4_bit7 $end
+$var wire 1 a) in0 $end
+$var wire 1 b) in0_gated $end
+$var wire 1 c) in1 $end
+$var wire 1 d) in1_gated $end
+$var wire 1 e) out $end
+$var wire 1 f) sel $end
+$var wire 1 g) sel_n $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope task read_bin $end
+$var reg 32 h) max [31:0] $end
+$var reg 32 i) val [31:0] $end
+$var integer 32 j) st [31:0] $end
+$upscope $end
+$scope task read_shift $end
+$var reg 32 k) val [31:0] $end
+$var integer 32 l) st [31:0] $end
+$var integer 32 m) tmp [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b111 }%
+b110 t%
+b101 k%
+b100 b%
+b11 Y%
+b10 P%
+b1 G%
+b0 >%
+b111 h$
+b110 :$
+b101 j#
+b100 <#
+b11 l"
+b10 >"
+b1 n
+b0 @
+b111 ?
+b110 >
+b101 =
+b100 <
+b11 ;
+b10 :
+b1 9
+b0 8
+$end
+#0
+$dumpvars
+b100 m)
+b1 l)
+b100 k)
+b1 j)
+b1111 i)
+b11111111 h)
+0g)
+1f)
+0e)
+0d)
+0c)
+0b)
+0a)
+0`)
+1_)
+0^)
+0])
+0\)
+0[)
+0Z)
+0Y)
+1X)
+0W)
+0V)
+0U)
+0T)
+0S)
+0R)
+1Q)
+0P)
+0O)
+0N)
+0M)
+0L)
+0K)
+1J)
+0I)
+0H)
+0G)
+0F)
+1E)
+0D)
+1C)
+0B)
+0A)
+0@)
+0?)
+1>)
+0=)
+1<)
+0;)
+0:)
+09)
+08)
+17)
+06)
+15)
+04)
+03)
+02)
+01)
+10)
+1/)
+0.)
+0-)
+0,)
+0+)
+0*)
+0))
+1()
+0')
+0&)
+0%)
+0$)
+0#)
+0")
+1!)
+0~(
+0}(
+0|(
+0{(
+0z(
+0y(
+1x(
+0w(
+0v(
+0u(
+0t(
+0s(
+0r(
+1q(
+0p(
+1o(
+0n(
+0m(
+1l(
+1k(
+1j(
+0i(
+1h(
+0g(
+0f(
+1e(
+1d(
+1c(
+0b(
+1a(
+0`(
+1_(
+1^(
+1](
+1\(
+0[(
+1Z(
+0Y(
+1X(
+1W(
+1V(
+1U(
+0T(
+0S(
+0R(
+0Q(
+0P(
+0O(
+1N(
+0M(
+0L(
+0K(
+0J(
+0I(
+0H(
+1G(
+0F(
+0E(
+0D(
+0C(
+0B(
+0A(
+1@(
+0?(
+0>(
+0=(
+0<(
+0;(
+0:(
+19(
+08(
+17(
+06(
+05(
+14(
+13(
+12(
+01(
+10(
+0/(
+1.(
+1-(
+1,(
+1+(
+0*(
+1)(
+0((
+1'(
+1&(
+1%(
+1$(
+0#(
+1"(
+0!(
+1~'
+1}'
+1|'
+b1111 {'
+b1111 z'
+b0 y'
+b100 x'
+b1111 w'
+0v'
+1u'
+1t'
+1s'
+1r'
+0q'
+0p'
+0o'
+1n'
+1m'
+1l'
+1k'
+0j'
+0i'
+0h'
+1g'
+1f'
+1e'
+1d'
+0c'
+0b'
+0a'
+1`'
+1_'
+1^'
+1]'
+0\'
+0['
+0Z'
+1Y'
+0X'
+0W'
+0V'
+0U'
+1T'
+0S'
+1R'
+0Q'
+0P'
+0O'
+0N'
+1M'
+0L'
+1K'
+0J'
+0I'
+0H'
+0G'
+1F'
+0E'
+1D'
+0C'
+0B'
+0A'
+0@'
+1?'
+1>'
+0='
+0<'
+0;'
+0:'
+09'
+08'
+17'
+06'
+05'
+04'
+03'
+02'
+01'
+10'
+0/'
+0.'
+0-'
+1,'
+0+'
+0*'
+1)'
+0('
+0''
+0&'
+1%'
+0$'
+0#'
+1"'
+0!'
+1~&
+0}&
+1|&
+1{&
+1z&
+1y&
+0x&
+1w&
+0v&
+1u&
+1t&
+1s&
+1r&
+0q&
+1p&
+0o&
+0n&
+1m&
+1l&
+1k&
+0j&
+1i&
+0h&
+0g&
+1f&
+1e&
+1d&
+0c&
+0b&
+0a&
+0`&
+0_&
+0^&
+1]&
+0\&
+0[&
+0Z&
+0Y&
+0X&
+0W&
+1V&
+0U&
+0T&
+0S&
+0R&
+0Q&
+0P&
+1O&
+0N&
+0M&
+0L&
+1K&
+0J&
+0I&
+1H&
+0G&
+1F&
+0E&
+1D&
+1C&
+1B&
+1A&
+0@&
+1?&
+0>&
+1=&
+1<&
+1;&
+1:&
+09&
+18&
+07&
+16&
+15&
+14&
+13&
+02&
+11&
+00&
+0/&
+1.&
+1-&
+b1111 ,&
+b1111 +&
+b11110000 *&
+b100 )&
+b1111 (&
+1'&
+0&&
+1%&
+1$&
+1#&
+1"&
+0!&
+0~%
+1|%
+0{%
+1z%
+1y%
+1x%
+1w%
+0v%
+0u%
+1s%
+0r%
+1q%
+1p%
+1o%
+1n%
+0m%
+0l%
+1j%
+0i%
+1h%
+1g%
+1f%
+1e%
+0d%
+0c%
+0a%
+1`%
+1_%
+1^%
+1]%
+0\%
+1[%
+1Z%
+1X%
+0W%
+1V%
+1U%
+0T%
+1S%
+0R%
+1Q%
+0O%
+1N%
+1M%
+1L%
+1K%
+0J%
+1I%
+1H%
+0F%
+1E%
+1D%
+1C%
+1B%
+0A%
+1@%
+1?%
+b11111011 =%
+b111111111 <%
+b1011 ;%
+1:%
+b1

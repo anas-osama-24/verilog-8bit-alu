@@ -8,13 +8,17 @@ module alu8 (
     wire [7:0] add_sub_result;
     wire [7:0] and_result, or_result, xor_result, not_result;
     wire [7:0] shr_result, shl_result;
-    wire [7:0] a_reversed, shl_reversed;
+    wire       adder_carry, is_arith;
 
     // arithmetic: op[0] = 1 only for SUB (op = 001)
     adder_sub8 add_sub (
         .a(a), .b(b), .sub(op[0]),
-        .sum(add_sub_result), .carry_out(carry)
+        .sum(add_sub_result), .carry_out(adder_carry)
     );
+
+    // carry only for ADD (000) and SUB (001)
+    nor g_arith (is_arith, op[2], op[1]);
+    and g_carry (carry, adder_carry, is_arith);
 
     // logic, one gate per bit
     genvar i;
@@ -27,18 +31,14 @@ module alu8 (
         end
     endgenerate
 
-    // shift right
+    // shifts
     barrel_shifter_right shifter_r (
         .data_in(a), .shift_amt(b[2:0]), .data_out(shr_result)
     );
 
-    // shift left: reverse bits, shift right, reverse back (wires only)
-    assign a_reversed = {a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7]};
-    barrel_shifter_right shifter_l (
-        .data_in(a_reversed), .shift_amt(b[2:0]), .data_out(shl_reversed)
+    barrel_shifter_left shifter_l (
+        .data_in(a), .shift_amt(b[2:0]), .data_out(shl_result)
     );
-    assign shl_result = {shl_reversed[0], shl_reversed[1], shl_reversed[2], shl_reversed[3],
-                         shl_reversed[4], shl_reversed[5], shl_reversed[6], shl_reversed[7]};
 
     // result select, one 8:1 mux per bit
     generate
