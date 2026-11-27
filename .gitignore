@@ -1,0 +1,13 @@
+# Simulation outputs
+sim
+*.vcd
+*.vvp
+*.out
+
+# GTKWave
+*.gtkw
+
+# Editor and OS
+.vscode/
+.DS_Store
+Thumbs.db
